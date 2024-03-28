@@ -106,3 +106,9 @@
     </script>
 </body>
 </html>
+// Retrieve the video URL parameter from the URL
+var urlParams = new URLSearchParams(window.location.search);
+var videoUrl = urlParams.get('videoUrl');
+
+// Use the video URL as needed (e.g., display the video)
+console.log('Video URL:', videoUrl);
