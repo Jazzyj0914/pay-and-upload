@@ -132,3 +132,64 @@ app.listen(PORT, () => {
     </script>
 </body>
 </html>
+<!-- payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment and Upload</title>
+</head>
+<body>
+    <h1>Payment and Upload</h1>
+    
+    <form id="payment-form">
+        <label for="video-url-field">Video URL:</label>
+        <input type="text" id="video-url-field" name="video-url" placeholder="Enter video URL">
+        <button type="button" id="pay-and-upload-button">Pay $3 and Upload</button>
+    </form>
+
+    <script>
+        document.getElementById('pay-and-upload-button').addEventListener('click', function() {
+            var videoUrl = document.getElementById('video-url-field').value;
+            localStorage.setItem('videoUrl', videoUrl); // Store video URL in local storage
+            processPaymentAndNavigate();
+        });
+
+        function processPaymentAndNavigate() {
+            // Simulate payment processing and navigate to "watch and earn" page
+            window.location.href = 'watch-and-earn.html';
+        }
+    </script>
+</body>
+</html>
+<!-- watch-and-earn.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch and Earn</title>
+</head>
+<body>
+    <h1>Watch and Earn</h1>
+    
+    <div>
+        <h2>Video</h2>
+        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        // Retrieve video URL from local storage
+        var videoUrl = localStorage.getItem('videoUrl');
+        if (videoUrl) {
+            // Set the video URL in the iframe
+            var iframe = document.querySelector('iframe');
+            iframe.src = videoUrl;
+        } else {
+            // Handle case where video URL is not available
+            console.error('Video URL not found in local storage');
+        }
+    </script>
+</body>
+</html>
