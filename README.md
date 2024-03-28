@@ -46,9 +46,8 @@
         // Simulated function to check payment confirmation (removed setTimeout)
         /*
         function checkPaymentConfirmation() {
-            // Simulated check for payment confirmation (replace with your actual payment confirmation logic)
-            // For demonstration purposes, we'll simulate a confirmation after 3 seconds
-            setTimeout(function() {
+            // Simulated check for payment confirmation (once payment is approved)
+    
                 // Simulated payment confirmed
                 // Proceed with video upload
                 uploadVideo();
