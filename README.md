@@ -87,15 +87,15 @@
             // Get the video URL from the video URL field
             var videoUrl = document.getElementById('video-url-field').value;
 
-            // Simulate payment processing (replace with actual payment processing logic)
+            // Simulate payment processing (once payment is confirmed upload video)
             console.log('Processing payment...');
 
-            // Simulate upload process (replace this with your actual upload process)
+            // Simulate upload process (once payment is confirmed)
             console.log('Uploading video from URL:', videoUrl);
             console.log('Video uploaded successfully.');
 
-            // Navigate to the "watch and earn" page (replace with your actual page URL)
-            window.location.href = 'https://yourwebsite.com/watch-and-earn';
+            // Navigate to the "watch and earn" page (https://a.picoapps.xyz/employee-political)
+            window.location.href = 'watch.html?videourl=' + encodeURIComponent{videoUrl};'https://yourwebsite.com/watch-and-earn';
         }
 
         // Event listener for when the pay $3 and upload button is clicked
