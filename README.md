@@ -1,64 +1,30 @@
 # pay-and-upload
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment and Upload</title>
-</head>
-<body>
-    <h1>Payment and Upload</h1>
-    
-    <form id="payment-form">
-        <!-- Other form fields -->
-        <label for="video-url-field">Video URL:</label>
-        <input type="text" id="video-url-field" name="video-url" placeholder="Enter video URL">
+const express = require('express');
+const multer = require('multer'); // For handling file uploads
+const fs = require('fs');
 
-        <!-- Pay and Upload Button -->
-        <button type="button" id="pay-and-upload-button">Pay $3 and Upload</button>
-    </form>
+const app = express();
+const upload = multer({ dest: 'uploads/' }); // Destination folder for uploaded files
 
-    <script>
-        // Function to handle payment processing and navigate to Stripe Checkout
-        function processPaymentAndNavigate() {
-            // Navigate to Stripe Checkout for payment (https://buy.stripe.com/3cs3fP0ev64NeE8aEE)
-            window.location.href = 'https://buy.stripe.com/3cs3fP0ev64NeE8aEE';
-        }
+// Route for handling video uploads
+app.post('/upload', upload.single('video'), (req, res) => {
+    // Validate and process the uploaded video file
+    const videoFile = req.file;
+    if (!videoFile) {
+        return res.status(400).json({ error: 'No video file uploaded' });
+    }
 
-        // Function to handle video upload after payment is confirmed
-        function uploadVideo() {
-            // Get the video URL from the video URL field
-            var videoUrl = document.getElementById('video-url-field').value;
+    // Save the video file to storage (e.g., filesystem)
+    fs.renameSync(videoFile.path, `uploads/${videoFile.originalname}`);
 
-            // Simulate upload process (upload video to watch and earn)
-            console.log('Uploading video from URL:', videoUrl);
-            console.log('Video uploaded successfully.');
-            // Navigate to the "watch and earn" page (https://a.picoapps.xyz/employee-political)
-            window.location.href = 'https://yourwebsite.com/watch-and-earn';
-        }
+    // Optionally, perform additional processing (e.g., database updates, video processing)
 
-        // Event listener for when the pay $3 and upload button is clicked
-        document.getElementById('pay-and-upload-button').addEventListener('click', function() {
-            // Process payment and navigate to Stripe Checkout
-            processPaymentAndNavigate();
-        });
+    // Respond with success message
+    res.json({ message: 'Video uploaded successfully' });
+});
 
-        // Simulated function to check payment confirmation (removed setTimeout)
-        /*
-        function checkPaymentConfirmation() {
-            // Simulated check for payment confirmation (upload video to watch and earn)
-            // For demonstration purposes, we'll simulate a confirmation after 3 seconds
-            setTimeout(function() {
-                // Simulated payment confirmed
-                // Proceed with video upload
-                uploadVideo();
-            }, 3000); // Simulate payment confirmation after 3 seconds
-        }
-        */
-
-        // Call the function to check payment confirmation (removed)
-        // This function should be called after the user is redirected back to your website from the payment page
-        // checkPaymentConfirmation();
-    </script>
-</body>
-</html>
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
