@@ -308,41 +308,7 @@ app.listen(PORT, () => {
     </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boost Your Social Media - Video Upload</title>
-</head>
-<body>
-    <h1>Boost Your Social Media - Video Upload</h1>
-    <form id="videoUploadForm" role="form" aria-labelledby="formTitle">
-        <fieldset>
-            <legend id="formTitle">Upload Your Video</legend>
-            <div>
-                <label for="video-url-field">Video URL:</label>
-                <input type="text" id="video-url-field" name="video-url" placeholder="Enter video URL">
-            </div>
-            <div>
-                <label for="paymentAmount">Payment Amount ($):</label>
-                <input type="number" id="paymentAmount" name="paymentAmount" min="0.01" step="0.01" required aria-required="true">
-            </div>
-            <div>
-                <button type="button" id="pay-and-upload-button">Pay $3 and Upload</button>
-            </div>
-        </fieldset>
-    </form>
 
-    <script>
-        document.getElementById('pay-and-upload-button').addEventListener('click', function() {
-            var videoUrl = document.getElementById('video-url-field').value;
-            var paymentAmount = document.getElementById('paymentAmount').value;
-
-            if (!videoUrl) {
-                alert('Please enter a video URL.');
-                return;
-            }
 
             if (!paymentAmount) {
                 alert('Please enter the payment amount.');
