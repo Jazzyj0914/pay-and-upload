@@ -91,3 +91,44 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Upload</title>
+</head>
+<body>
+    <h1>Video Upload</h1>
+    
+    <form id="video-upload-form" enctype="multipart/form-data">
+        <input type="file" id="video-file" name="video" accept="video/*">
+        <button type="button" id="upload-button">Upload Video</button>
+    </form>
+
+    <script>
+        document.getElementById('upload-button').addEventListener('click', function() {
+            var formData = new FormData();
+            var videoFile = document.getElementById('video-file').files[0];
+            formData.append('video', videoFile);
+
+            fetch('http://localhost:3000/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Video uploaded successfully');
+                } else {
+                    alert('Failed to upload video');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while uploading the video');
+            });
+        });
+    </script>
+</body>
+</html>
