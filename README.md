@@ -62,3 +62,47 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment and Upload</title>
+</head>
+<body>
+    <h1>Payment and Upload</h1>
+    
+    <form id="payment-form">
+        <!-- Other form fields -->
+        <label for="video-url-field">Video URL:</label>
+        <input type="text" id="video-url-field" name="video-url" placeholder="Enter video URL">
+
+        <!-- Pay and Upload Button -->
+        <button type="button" id="pay-and-upload-button">Pay $3 and Upload</button>
+    </form>
+
+    <script>
+        // Function to handle payment processing and navigate to Stripe Checkout
+        function processPaymentAndUpload() {
+            // Get the video URL from the video URL field
+            var videoUrl = document.getElementById('video-url-field').value;
+
+            // Simulate payment processing (replace with actual payment processing logic)
+            console.log('Processing payment...');
+
+            // Simulate upload process (replace this with your actual upload process)
+            console.log('Uploading video from URL:', videoUrl);
+            console.log('Video uploaded successfully.');
+
+            // Navigate to the "watch and earn" page (replace with your actual page URL)
+            window.location.href = 'https://yourwebsite.com/watch-and-earn';
+        }
+
+        // Event listener for when the pay $3 and upload button is clicked
+        document.getElementById('pay-and-upload-button').addEventListener('click', function() {
+            // Process payment and upload video
+            processPaymentAndUpload();
+        });
+    </script>
+</body>
+</html>
