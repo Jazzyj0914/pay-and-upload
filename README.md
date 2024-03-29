@@ -62,3 +62,48 @@
 </body>
 </html>
 <!DOCTYPE html>
+const express = require('express');
+const bodyParser = require('body-parser');
+const stripe = require('stripe')('sk_live_...AxFR');
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Parse JSON bodies
+app.use(bodyParser.json());
+
+// Endpoint to handle incoming webhook events from Stripe
+app.post('/stripe-webhook', async (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, 'whsec_rfXz4SiM9BeikFtAO4NShiRerhrZ0GFH');
+  } catch (err) {
+    console.error('Webhook signature verification failed.', err);
+    return res.status(400).send('Webhook Error: Signature Verification Failed');
+  }
+
+  // Handle the event
+  switch (event.type) {
+    case 'payment_intent.succeeded':
+      const paymentIntent = event.data.object;
+      // Handle successful payment confirmation
+      console.log('Payment confirmation received:', paymentIntent);
+      break;
+    case 'payment_intent.failed':
+      const failedPaymentIntent = event.data.object;
+      // Handle failed payment
+      break;
+    // Handle other event types as needed
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  res.status(200).end();
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
